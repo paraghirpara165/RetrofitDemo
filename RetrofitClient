@@ -1,4 +1,12 @@
+//Retrofit Dependancy
 
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.6.0'
+
+//Retrofit Client////////////////////////////////////////////////
 import android.content.Context;
 
 import java.util.concurrent.TimeUnit;
@@ -46,4 +54,34 @@ public class RetrofitClient {
     public Api getMyApi() {
         return myApi;
     }
+}
+
+
+////////////////////////////////////////////////
+API Interface
+
+import com.example.retrofitdemo.MainModel;
+
+import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.POST;
+
+public interface Api {
+
+    String BASE_URL = "https://reqres.in/";
+
+    @GET("/api/users/2")
+    Call<MainModel> onGetSingleUser();
+
+    @FormUrlEncoded
+    @POST("/api/v1/auth/login")
+    Call<MainModel> onPersonalDetailsUsers(
+            @Field("email") String email,
+            @Field("password") String password,
+            @Field("meetingId") String meetingID);
+
+
 }
